@@ -21,4 +21,11 @@ services:
             - ./php/src:/var/www/html
 
     mysql:
-        
+        build: ./mysql/
+        restart: always
+        volumes:
+            - ./mysql/backup:/var/lib/mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
