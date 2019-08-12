@@ -17,7 +17,7 @@ services:
         build:
             context: ./php/
             args:
-                - PHP_VERSION=${PHP_VERSION}
+                - PHP_LOCAL_VERSION=${PHP_VERSION}
         ports:
             - 9000:9000
         volumes:
