@@ -1,7 +1,8 @@
-FROM php:7.2-fpm-stretch
+ARG PHP_VERSION
+
+FROM php:${PHP_VERSION}-fpm-stretch
 
 RUN apt update
-RUN apt upgrade -y
 
 # Extension PHP
 RUN apt-get install -y apt-transport-https
@@ -14,13 +15,15 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN docker-php-ext-install -j$(nproc) gd
 
 # Enable Mcrypt
-# Use
-# RUN docker-php-ext-install mcrypt
-# With PHP version < 7.2
-RUN pecl install mcrypt-1.0.2
-RUN docker-php-ext-enable mcrypt
+RUN if [ ${PHP_VERSION} -ge 7.2 ]; then \
+    pecl install mcrypt-1.0.2 && \
+    docker-php-ext-enable mcrypt \
+;else \
+    docker-php-ext-install mcrypt \
+;fi
 
 # Calendar
+RUN docker-php-ext-configure calendar
 RUN docker-php-ext-install calendar
 
 # Iconv
@@ -38,7 +41,6 @@ RUN docker-php-ext-install pdo
 
 # Mysqli
 RUN docker-php-ext-install mysqli
-RUN docker-php-ext-enable mysqli
 
 # Mysql
 RUN docker-php-ext-install pdo_mysql

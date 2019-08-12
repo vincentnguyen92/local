@@ -14,7 +14,10 @@ services:
             - ./server/vhost:/etc/nginx/conf.d
 
     php:
-        build: ./php/
+        build:
+            context: ./php/
+            args:
+                - PHP_VERSION=${PHP_VERSION}
         ports:
             - 9000:9000
         volumes:
