@@ -19,10 +19,10 @@ RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ]; then \
   if [ $(php -r "echo PHP_MINOR_VERSION;") = "2" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "3" ]; then \
     pecl install mcrypt-1.0.2 && \
     docker-php-ext-enable mcrypt \
-  else \
+  ;else \
     docker-php-ext-install mcrypt \
-  fi \
-;else \
+  ;fi \
+else \
   docker-php-ext-install mcrypt \
 ;fi
 
@@ -32,10 +32,6 @@ RUN docker-php-ext-install calendar
 
 # Iconv
 RUN docker-php-ext-install iconv
-
-# XML
-RUN apt install -y libxml2-dev
-RUN docker-php-ext-install simplexml
 
 # Mbstring
 RUN docker-php-ext-install mbstring
@@ -52,6 +48,3 @@ RUN docker-php-ext-install pdo_mysql
 # Postgre
 RUN apt-get install -y libpq-dev
 RUN docker-php-ext-install pdo_pgsql
-
-# Curl
-RUN apt install -y curl
