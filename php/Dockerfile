@@ -1,6 +1,6 @@
-ARG PHP_VERSION
+ARG PHP_LOCAL_VERSION
 
-FROM php:${PHP_VERSION}-fpm-stretch
+FROM php:${PHP_LOCAL_VERSION}-fpm-stretch
 
 RUN apt update
 
@@ -15,11 +15,15 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN docker-php-ext-install -j$(nproc) gd
 
 # Enable Mcrypt
-RUN if [ ${PHP_VERSION} -ge 7.2 ]; then \
+RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ]; then \
+  if [ $(php -r "echo PHP_MINOR_VERSION;") = "2" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "3" ]; then \
     pecl install mcrypt-1.0.2 && \
     docker-php-ext-enable mcrypt \
-;else \
+  else \
     docker-php-ext-install mcrypt \
+  fi \
+;else \
+  docker-php-ext-install mcrypt \
 ;fi
 
 # Calendar
