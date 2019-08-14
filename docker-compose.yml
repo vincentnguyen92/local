@@ -25,7 +25,10 @@ services:
             - ./php/php.ini/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
 
     mysql:
-        build: ./mysql/
+        build:
+            context: ./mysql/
+            args:
+                - MYSQL_VERSION=${MYSQL_VERSION}
         restart: always
         volumes:
             - ./mysql/backup:/var/lib/mysql
