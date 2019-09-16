@@ -51,3 +51,8 @@ RUN docker-php-ext-install pdo_pgsql
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
+# Install Zip
+RUN apt-get install -y zip libzip-dev \
+  && docker-php-ext-configure zip --with-libzip \
+  && docker-php-ext-install zip
