@@ -31,3 +31,6 @@ This project is licensed under the MIT License
 
 * **Using mysql instead localhost at config your project file.**
 
+## Run Composer
+`docker-compose exec php composer install -d directory_in_src`
+

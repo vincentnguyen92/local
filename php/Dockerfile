@@ -48,3 +48,6 @@ RUN docker-php-ext-install pdo_mysql
 # Postgre
 RUN apt-get install -y libpq-dev
 RUN docker-php-ext-install pdo_pgsql
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
