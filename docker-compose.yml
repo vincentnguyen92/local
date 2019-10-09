@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+    # Nginx Configuration
     server:
         build: ./server/
         depends_on:
@@ -8,57 +9,66 @@ services:
         ports:
             - 80:80
             - 443:443
+        networks:
+            - local_net
         volumes:
             - ./src:/var/www/html
             - ./server/logs:/var/log/nginx
             - ./server/vhost:/etc/nginx/conf.d
-
+    # PHP Configuration
     php:
         build:
             context: ./php/
             args:
                 - PHP_LOCAL_VERSION=${PHP_VERSION}
-        ports:
-            - 9000:9000
+        networks:
+            - local_net
         volumes:
             - ./src:/var/www/html
             - ./php/php.ini/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
-
+    # Mysql Configuration
     mysql:
         build:
             context: ./mysql/
             args:
                 - MYSQL_VERSION=${MYSQL_VERSION}
         restart: always
+        networks:
+            local_net:
+                ipv4_address: ${MYSQL_IP}
         volumes:
             - ./mysql/backup:/var/lib/mysql
         ports:
             - 3306:3306
         environment:
             MYSQL_ROOT_PASSWORD: root
-
+    # Postgres Configuration
     postgres:
         image: postgres
         restart: always
+        networks:
+            local_net:
+                ipv4_address: ${POSTGRES_IP}
         ports:
             - 5432:5432
         environment:
             POSTGRES_PASSWORD: root
-
+    # Mongo Configuration
     mongo:
         image: mongo
         restart: always
+        networks:
+            local_net:
+                ipv4_address: ${MONGO_IP}
         ports:
             - 27017:27017
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: root
-
-    mongo-express:
-        image: mongo-express
-        restart: always
-        ports:
-            - 8081:8081
-        environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: root
-            ME_CONFIG_MONGODB_ADMINPASSWORD: root
+## Setup a local network using the IP Adress for services
+networks:
+    local_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: ${SUBNET_MASK}
