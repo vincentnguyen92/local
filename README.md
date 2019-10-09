@@ -7,7 +7,12 @@
 Using with docker-compose version 3
 ```
 docker-compose up -d --build
+mv .env-example .env
 ```
+And your localhost was be ready...:star:  
+
+**Notice:** Remember edit your hosts file  
+**Example:** 127.0.0.1 site1.local
 
 ## How To Create A New Site
 * Clone a nginx config file in vhost directory **site1.conf** and edit ***server_name*** and ***root***
