@@ -17,6 +17,7 @@ services:
             - ./server/vhost:/etc/nginx/conf.d
     # PHP Configuration
     php:
+        container_name: local_php
         build:
             context: ./php/
             args:
