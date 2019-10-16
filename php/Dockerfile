@@ -56,9 +56,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 RUN apt-get install -y ssmtp && \
   apt-get clean && \
   echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
-ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 # Install Zip
 RUN apt-get install -y zip libzip-dev \
   && docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip
+
+# Set TAG image
+TAG iamvincent/php:stretch-${PHP_LOCAL_VERSION}
