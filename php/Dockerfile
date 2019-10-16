@@ -61,6 +61,3 @@ RUN apt-get install -y ssmtp && \
 RUN apt-get install -y zip libzip-dev \
   && docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip
-
-# Set TAG image
-TAG iamvincent/php:stretch-${PHP_LOCAL_VERSION}

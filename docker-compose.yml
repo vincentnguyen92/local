@@ -2,6 +2,38 @@ version: '3.4'
 
 services:
 
+    # PHP Configuration
+    php:
+        container_name: php
+        image: iamvincent/php:stretch-${PHP_VERSION}
+        build:
+            context: ./php/
+            args:
+                - PHP_LOCAL_VERSION=${PHP_VERSION}
+        restart: unless-stopped
+        volumes:
+            - ./src:/var/www/html
+            - ./php/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+            - ./php/php.ini/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
+        networks:
+            - local_net
+
+    # Mysql Configuration
+    mysql:
+        container_name: db_mysql
+        image: mysql:5.6
+        restart: unless-stopped
+        volumes:
+            - ./mysql/backup:/var/lib/mysql
+            - ./mysql/restore:/docker-entrypoint-initdb.d # restore database
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            local_net:
+                ipv4_address: ${MYSQL_IP}
+
     # Nginx Configuration
     webserver:
         container_name: webserver
@@ -18,37 +50,17 @@ services:
         networks:
             - local_net
 
-    # PHP Configuration
-    php:
-        container_name: php
-        image: iamvincent/php:stretch
-        build:
-            context: ./php/
-            args:
-                - PHP_LOCAL_VERSION=${PHP_VERSION}
-        restart: unless-stopped
+    # PhpMyadmin service
+    pma:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql:3306
+        ports:
+            - 8800:80
         networks:
             - local_net
-        volumes:
-            - ./src:/var/www/html
-            - ./php/ssmtp.conf:/etc/ssmtp/ssmtp.conf
-            - ./php/php.ini/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
-
-    # Mysql Configuration
-    mysql:
-        container_name: db_mysql
-        image: mysql:5.6
-        restart: unless-stopped
-        networks:
-            local_net:
-                ipv4_address: ${MYSQL_IP}
-        volumes:
-            - ./mysql/backup:/var/lib/mysql
-            - ./mysql/restore:/docker-entrypoint-initdb.d # restore database
-        ports:
-            - 3306:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: root
 
 ## Setup a local network using the IP Adress for services
 networks:

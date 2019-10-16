@@ -38,7 +38,6 @@ services:
         volumes:
             - ./server/vhost:/etc/nginx/conf.d
             - ./src:/var/www/html
-        
 
     # PhpMyadmin service
     pma:
