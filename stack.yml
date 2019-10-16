@@ -20,8 +20,6 @@ services:
         volumes:
             - ./mysql/backup:/var/lib/mysql
             - ./mysql/restore:/docker-entrypoint-initdb.d # restore database
-        ports:
-            - 3306:3306
         environment:
             MYSQL_ROOT_PASSWORD: root
 
