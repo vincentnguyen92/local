@@ -6,8 +6,8 @@
 ### Installing
 Using with docker-compose version 3
 ```
-docker-compose up -d --build
 mv .env-example .env
+docker-compose up -d --build
 ```
 And your localhost was be ready...:star:  
 
