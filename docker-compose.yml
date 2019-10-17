@@ -45,7 +45,7 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ./server/vhost:/etc/nginx/conf.d
+            - ./server/nginx.conf:/etc/nginx/nginx.conf
             - ./src:/var/www/html
         networks:
             - local_net
