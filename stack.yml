@@ -25,7 +25,7 @@ services:
 
     # Nginx Configuration
     webserver:
-        image: nginx:1.17.4-alpine
+        image: iamvincent/nginx:1.17.4-alpine
         networks:
             - local_net
         depends_on:

@@ -5,7 +5,7 @@ services:
     # PHP Configuration
     php:
         container_name: php
-        image: iamvincent/php:stretch-${PHP_VERSION}
+        image: iamvincent/php:${PHP_VERSION}-stretch
         build:
             context: ./php/
             args:
@@ -35,9 +35,11 @@ services:
     # Nginx Configuration
     webserver:
         container_name: webserver
+        image: iamvincent/nginx:1.17.4-alpine
+        build:
+            context: ./server/
         depends_on:
             - php
-        image: nginx:1.17.4-alpine
         restart: unless-stopped
         ports:
             - "80:80"

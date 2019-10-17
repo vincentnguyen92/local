@@ -25,7 +25,7 @@ And your localhost was be ready...:star:
 | Mongo    | **172.28.0.12** |  27017  |
 
 ## Command Useful
-* Access Container `docker-compose exec -it local_php bash`
+* Access Container `docker exec -it local_php bash`
 * Install Composer `docker-compose exec local_php composer install -d /var/www/html/{directory_app}`
 
 ## Authors
