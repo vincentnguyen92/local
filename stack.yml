@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.4'
 
 services:
 
@@ -52,5 +52,5 @@ services:
 ## Setup a local network using the IP Adress for services
 networks:
     local_net:
-        driver: overlay
+        driver: bridge
             
