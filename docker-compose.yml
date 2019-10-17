@@ -25,7 +25,6 @@ services:
         restart: unless-stopped
         volumes:
             - ./mysql/backup:/var/lib/mysql
-            - ./mysql/restore:/docker-entrypoint-initdb.d # restore database
         environment:
             MYSQL_ROOT_PASSWORD: root
         networks:
