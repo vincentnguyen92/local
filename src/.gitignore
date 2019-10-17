@@ -1,5 +1,5 @@
 *
+!site1/*
+!site2/*
 !.gitignore
 !index.php
-!site1/
-!site2/
