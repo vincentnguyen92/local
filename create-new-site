@@ -1,54 +1,20 @@
 #!/bin/bash
 
-source .script/incl.sh
+source .script/incl.sh;
 
 greeting;
+
 read YOUR_CHOICE;
 
-
-
-
-
-
-
-
-
-
-
-
-
-check_key_exist;
-exit;
-
-
-echo $YOUR_CHOICE;
-
-exit;
-
-
-DOMAIN="hello.local"
-actionCreateNewSite "$DOMAIN";
-exit;
-
-
-
-actionDestroySite()
-{
-	# TODO
-	echo "Destroy a site";
-}
-
-checkDomainValid()
-{
-	local __result=false;
-
-	__result=true;
-	echo $__result;
-}
-
-RESULT=$(checkDomainValid);
-echo $RESULT;
-greetings;
-read YOUR_CHOICE
-
+case $YOUR_CHOICE in
+     1)
+          echo "I want create new"
+          ;;
+     2)
+          echo "I want delete"
+          ;;
+     *)
+          echo "Hmm, wrong number....."
+          ;;
+esac
 exit;
