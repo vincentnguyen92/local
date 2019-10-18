@@ -1,0 +1,37 @@
+#!/bin/bash
+source .script/incl.sh
+
+greeting;
+read YOUR_CHOICE;
+
+echo $YOUR_CHOICE;
+
+exit;
+
+
+DOMAIN="hello.local"
+actionCreateNewSite "$DOMAIN";
+exit;
+
+
+
+actionDestroySite()
+{
+	# TODO
+	echo "Destroy a site";
+}
+
+checkDomainValid()
+{
+	local __result=false;
+
+	__result=true;
+	echo $__result;
+}
+
+RESULT=$(checkDomainValid);
+echo $RESULT;
+greetings;
+read YOUR_CHOICE
+
+exit;
