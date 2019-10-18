@@ -3,7 +3,6 @@
 add_configuration_nginx()
 {
     echo "<--- Start add to nginx configuration";
-    echo -en "\n\n" >> server/sites-avaiable.conf;
     echo -en "# Config-$1\n" >> server/sites-avaiable.conf;
     echo -en "include /var/www/html/$1/$1.conf;" >> server/sites-avaiable.conf;
     echo "Added to nginx configuration --->";
@@ -36,4 +35,9 @@ create_new_site ()
     add_configuration_nginx "$DOMAIN";
     clone_example_source "$DOMAIN";
     replace_string "$DOMAIN";
+
+    echo "<--- Start reload webserver container";
+    docker restart webserver
+    echo "Updated webserver success --->";
+    read;
 }
