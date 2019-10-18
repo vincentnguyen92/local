@@ -4,7 +4,7 @@ add_configuration_nginx()
 {
     echo "<--- Start add to nginx configuration";
     echo -en "\n\n" >> server/sites-avaiable.conf;
-    echo -en "# Add $1 configuration nginx\n" >> server/sites-avaiable.conf;
+    echo -en "# Config-$1\n" >> server/sites-avaiable.conf;
     echo -en "include /var/www/html/$1/$1.conf;" >> server/sites-avaiable.conf;
     echo "Added to nginx configuration --->";
 }
@@ -12,7 +12,7 @@ add_configuration_nginx()
 clone_example_source ()
 {
     echo "<--- Start clone from source";
-    cp -avr .script/example.local/ www/$1/;
+    cp -avr bin/.script/example.local/ www/$1/;
     echo "Clone success --->";
 }
 
