@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .script/incl.sh;
+source .script/init.sh;
 
 greeting;
 
@@ -8,8 +8,8 @@ read YOUR_CHOICE;
 
 case $YOUR_CHOICE in
      1)
-          echo "I want create new"
-          ;;
+            create_new_site
+            ;;
      2)
           echo "I want delete"
           ;;

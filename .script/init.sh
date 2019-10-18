@@ -2,4 +2,4 @@
 
 source .script/constants.sh;
 source .script/greeting.sh;
-source .script/check_key_exist.sh;
+source .script/create_new_site.sh;
