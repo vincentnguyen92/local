@@ -1,6 +1,11 @@
 *
-!site1/**
-!site2/**
-!example.local/**
+/*
+!/site1
+!/site1/*
+!/site2
+!/site2/*
+!/example.local
+!/example.local/*
+
 !.gitignore
 !index.php
