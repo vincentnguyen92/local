@@ -1,5 +1,6 @@
 *
 !site1/*
 !site2/*
+!example.local/*
 !.gitignore
 !index.php
