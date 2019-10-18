@@ -8,11 +8,13 @@ read YOUR_CHOICE;
 
 case $YOUR_CHOICE in
      1)
-            create_new_site
-            ;;
+        create_new_site
+        ;;
      2)
-          echo "I want delete"
-          ;;
+        echo -en "\n";
+        echo "<--- Being under construction..^^ --->";
+        read;
+        ;;
      *)
           echo "Hmm, wrong number....."
           ;;

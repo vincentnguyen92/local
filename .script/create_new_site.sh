@@ -2,30 +2,38 @@
 
 add_configuration_nginx()
 {
+    echo "<--- Start add to nginx configuration";
     echo -en "\n\n" >> server/sites-avaiable.conf;
     echo -en "# Add $1 configuration nginx\n" >> server/sites-avaiable.conf;
     echo -en "include /var/www/html/$1/$1.conf;" >> server/sites-avaiable.conf;
-
-    echo "Defined in nginx success...";
+    echo "Added to nginx configuration --->";
 }
 
 clone_example_source ()
 {
-    cp -avr www/example.local/ www/$1/;
-
-    echo "Clone success";
+    echo "<--- Start clone from source";
+    cp -avr .script/example.local/ www/$1/;
+    echo "Clone success --->";
 }
 
-find_and_replace ()
+replace_string ()
 {
-    find www/ -name '*.php' -exec
+    echo "<--- Changing example.conf to $1.conf";
+    mv www/$1/example.local.conf www/$1/$1.conf;
+    echo "Changed to $1.conf --->";
+    
+    echo "<--- Find and replace example.local string to $1";
+    sed -i "s/example.local/$1/g" www/$1/$1.conf;
+    sed -i "s/example.local/$1/g" www/$1/src/index.php;
+    echo "Replaced to $1 --->";
 }
 
 create_new_site () 
 {
-    echo "Enter you domain or subdomain";
+    echo "<--- Enter you domain or subdomain --->";
     read DOMAIN;
-    
+
     add_configuration_nginx "$DOMAIN";
     clone_example_source "$DOMAIN";
+    replace_string "$DOMAIN";
 }
