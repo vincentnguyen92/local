@@ -1,8 +1,25 @@
 #!/bin/bash
+
 source .script/incl.sh
 
 greeting;
 read YOUR_CHOICE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+check_key_exist;
+exit;
+
 
 echo $YOUR_CHOICE;
 
