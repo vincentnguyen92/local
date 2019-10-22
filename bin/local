@@ -7,16 +7,21 @@ greeting;
 read YOUR_CHOICE;
 
 case $YOUR_CHOICE in
-     1)
-        create_new_site
-        ;;
-     2)
-        echo -en "\n";
-        echo "<--- Being under construction..^^ --->";
-        read;
-        ;;
-     *)
-          echo "Hmm, wrong number....."
-          ;;
+	1)
+		create_new_site
+		;;
+	2)
+		echo -en "\n";
+		echo "<--- Being under construction..^^ --->";
+		read;
+		;;
+	3)
+		echo -en "\n";
+		echo "<--- Cleaning all project --->";
+		read;
+		;;
+	*)
+		echo "Hmm, wrong number....."
+		;;
 esac
 exit;
