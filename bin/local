@@ -16,9 +16,7 @@ case $YOUR_CHOICE in
 		read;
 		;;
 	3)
-		echo -en "\n";
-		echo "<--- Cleaning all project --->";
-		read;
+		clean_all
 		;;
 	*)
 		echo "Hmm, wrong number....."
