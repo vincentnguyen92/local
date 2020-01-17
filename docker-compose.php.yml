@@ -1,0 +1,15 @@
+version: "3.6"
+
+services:
+
+  php:
+    build: ./services/php
+    container_name: php
+    image: vincent:php
+    networks:
+      - mylocal
+    restart: unless-stopped
+
+networks:
+  mylocal:
+    external: true

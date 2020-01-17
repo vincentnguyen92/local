@@ -1,0 +1,24 @@
+version: "3.6"
+
+services:
+
+  php:
+    build: ./services/php
+    container_name: php
+    image: vincent:php
+    restart: unless-stopped
+    volumes: 
+      - ./www:/var/www/html
+
+  nginx:
+    build: ./services/nginx
+    container_name: nginx
+    image: vincent:nginx
+    networks:
+      mylocal:
+        ipv4_address: 172.28.0.100
+    restart: unless-stopped
+
+networks:
+  mylocal:
+    external: true
