@@ -4,7 +4,7 @@ services:
 
   php:
     build: ./services/php
-    container_name: php
+    container_name: ${PROJECT_NAME}-php
     image: ${REPOSITORY_HUB}/php
     networks:
       public_net:
@@ -15,7 +15,7 @@ services:
   
   httpd:
     build: ./services/httpd
-    container_name: httpd
+    container_name: ${PROJECT_NAME}-httpd
     image: ${REPOSITORY_HUB}/httpd
     networks:
       public_net:
