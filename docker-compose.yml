@@ -3,7 +3,10 @@ version: "3.6"
 services:
 
   php:
-    build: ./services/php
+    build:
+      context: ./services/php
+      args:
+        - PHP_LOCAL_VERSION=${PHP_VERSION}
     container_name: ${PROJECT_NAME}-php
     image: ${REPOSITORY_HUB}/php
     networks:

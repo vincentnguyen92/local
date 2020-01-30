@@ -1,2 +1,3 @@
-FROM php:7.4-fpm-alpine3.11
-COPY ./php.ini/php7.4.ini /usr/local/etc/php/conf.d/php7.4.ini
+ARG PHP_LOCAL_VERSION
+FROM php:${PHP_LOCAL_VERSION}-fpm-alpine
+COPY ./custom.ini /usr/local/etc/php/conf.d/custom.ini
