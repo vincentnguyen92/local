@@ -9,6 +9,7 @@ services:
         - PHP_LOCAL_VERSION=${PHP_VERSION}
     container_name: ${PROJECT_NAME}-php
     image: ${REPOSITORY_HUB}/php
+    user: "1000:1000"
     networks:
       public_net:
         ipv4_address: ${PHP_IP}

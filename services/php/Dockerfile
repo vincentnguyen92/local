@@ -21,5 +21,10 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-2.8.1 \
     && docker-php-ext-enable redis xdebug
 
+# Setup permission from container
+RUN apk --no-cache add shadow && \
+    usermod -u 1000 www-data && \
+    groupmod -g 1000 www-data
+
 # Setting PHP.ini
 COPY ./custom.ini /usr/local/etc/php/conf.d/custom.ini
