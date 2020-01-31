@@ -21,6 +21,9 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-2.8.1 \
     && docker-php-ext-enable redis xdebug
 
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer 
+
 # Setup permission from container
 RUN apk --no-cache add shadow && \
     usermod -u 1000 www-data && \
