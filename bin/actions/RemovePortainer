@@ -1,0 +1,14 @@
+#!/bin/bash
+ROOT=$(dirname $(dirname $(readlink -f $0)))
+
+source $ROOT/bin/tasks/GetIdContainerFromImage
+source $ROOT/bin/tasks/StopContainer
+
+IMAGE_NAME=portainer/portainer
+
+function RemovePortainer () {
+    container_id=$(GetIdContainerFromImage $IMAGE_NAME)
+    if StopContainer $container_id; then
+        echo "Notice: Remove ${IMAGE_NAME} success"
+    fi
+}

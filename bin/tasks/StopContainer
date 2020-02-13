@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function StopContainer() {
+    if [ -z "$1" ]; then
+        echo "Error: Missing Container Id"
+        exit
+    else
+        local container_id=$1
+    fi
+    
+    docker container stop $container_id && docker container rm $container_id
+}

@@ -1,0 +1,7 @@
+#!/bin/bash
+ROOT=$(dirname $(dirname $(readlink -f $0)))
+
+source $ROOT/bin/actions/CreatePortainer
+source $ROOT/bin/actions/RemovePortainer
+
+RemovePortainer

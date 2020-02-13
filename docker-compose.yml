@@ -58,6 +58,22 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
+  phpmyadmin:
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    networks:
+      public_net:
+        ipv4_address: ${PHPMYADMIN_IP}
+    depends_on:
+      - mysql
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=${PROJECT_NAME}-mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - 80:80
+
 networks:
   public_net:
     driver: bridge

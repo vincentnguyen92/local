@@ -1,0 +1,11 @@
+#!/bin/bash
+function CreatePortainer() {
+    # TODO: use task CreateContainer
+    port=${1:-9000}
+
+    if ! docker container run -d -p ${port}:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer > /dev/null 2>&1; then
+        echo "Portainer already running at http://localhost:${port}"
+    else
+        echo "Portainer started at http://localhost:${port}"
+    fi
+}
