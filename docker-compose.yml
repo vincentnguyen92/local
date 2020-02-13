@@ -45,7 +45,18 @@ services:
     restart: unless-stopped
     environment:
       - APACHE_IP=${APACHE_IP}
-    command: sh -c "envsubst '$$APACHE_IP' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'" 
+    command: sh -c "envsubst '$$APACHE_IP' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+  mysql:
+    build: ./services/mysql
+    container_name: ${PROJECT_NAME}-mysql
+    image: ${REPOSITORY_HUB}/mysql
+    networks:
+      public_net:
+        ipv4_address: ${MYSQL_IP}
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
 
 networks:
   public_net:
