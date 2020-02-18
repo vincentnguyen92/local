@@ -9,7 +9,7 @@ server {
     location / {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://${APACHE_IP};
+        proxy_pass http://${APACHE_SERVER};
     }
 
     # deny access to .htaccess files, if Apache's document root
@@ -31,7 +31,7 @@ server {
     location / {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://${APACHE_IP};
+        proxy_pass http://${APACHE_SERVER};
     }
 
     # deny access to .htaccess files, if Apache's document root
