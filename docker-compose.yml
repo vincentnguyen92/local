@@ -11,8 +11,7 @@ services:
     image: ${REPOSITORY_HUB}/php
     user: "1000:1000"
     networks:
-      public_net:
-        ipv4_address: ${PHP_IP}
+      - public_net
     restart: unless-stopped
     volumes:
       - ./www:/var/www/html
@@ -22,8 +21,7 @@ services:
     container_name: ${PROJECT_NAME}-httpd
     image: ${REPOSITORY_HUB}/httpd
     networks:
-      public_net:
-        ipv4_address: ${APACHE_IP}
+      - public_net
     depends_on:
       - php
     restart: unless-stopped
